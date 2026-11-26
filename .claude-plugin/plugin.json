@@ -1,7 +1,7 @@
 {
   "name": "grod",
   "displayName": "GRØD",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Ask Claude about the meetings GRØD recorded on your Mac: what was decided, what is still open, and what someone said. Read-only. Needs GRØD on the same Mac with Allow MCP apps turned on.",
   "author": {
     "name": "Gaspery Limited",

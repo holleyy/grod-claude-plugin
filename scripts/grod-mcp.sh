@@ -2,7 +2,7 @@
 # Starts the MCP server built into GRØD, then gets out of the way.
 #
 # This script reads no meetings and sends nothing anywhere. It finds your copy
-# of GRØD and replaces itself with it (exec), so Claude talks to GRØD directly
+# of GRØD and replaces itself with it (exec), so the app (Claude or Codex) talks to GRØD directly
 # over standard input and output. GRØD then reads its own meeting store with
 # saving turned off, and only if Allow MCP apps is on in GRØD's settings.
 #
@@ -40,7 +40,7 @@ if ! usable "$app"; then
 fi
 
 if ! usable "$app"; then
-  echo "GRØD isn't installed on this Mac, so Claude can't read its meetings. Install GRØD, open it once, and turn on Allow MCP apps in its settings." >&2
+  echo "GRØD isn't installed on this Mac, so this app can't read its meetings. Install GRØD, open it once, and turn on Allow MCP apps in its settings." >&2
   exit 69
 fi
 

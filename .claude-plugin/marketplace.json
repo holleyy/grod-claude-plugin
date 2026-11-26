@@ -12,7 +12,7 @@
     {
       "name": "grod",
       "source": "./",
-      "description": "Ask Claude about the meetings GRØD recorded on your Mac: recaps, decisions, meeting prep and finding what was said.",
+      "description": "Ask Claude or Codex about the meetings GRØD recorded on your Mac: recaps, decisions, meeting prep and finding what was said.",
       "category": "productivity"
     }
   ]

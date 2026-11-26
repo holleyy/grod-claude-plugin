@@ -1,0 +1,33 @@
+{
+  "name": "grod",
+  "version": "0.2.0",
+  "description": "Ask Codex about the meetings GRØD recorded on your Mac: what was decided, what is still open, and what someone said. Read-only. Needs GRØD on the same Mac with Allow MCP apps turned on.",
+  "author": {
+    "name": "Gaspery Limited",
+    "url": "https://gaspery.com"
+  },
+  "homepage": "https://gaspery.com/grod",
+  "repository": "https://github.com/holleyy/grod-plugin",
+  "license": "MIT",
+  "keywords": ["meetings", "meeting notes", "transcripts", "decisions", "action items", "mac"],
+  "skills": "./skills/",
+  "mcpServers": {
+    "grod": {
+      "command": "sh",
+      "args": ["./scripts/grod-mcp.sh"],
+      "cwd": "."
+    }
+  },
+  "interface": {
+    "displayName": "GRØD",
+    "shortDescription": "Ask about the meetings GRØD recorded on your Mac",
+    "longDescription": "Recap a week, prepare for a meeting, see what was decided and what is still open, or find what someone said and when. Codex reads GRØD's meetings on your Mac through GRØD's own read-only server, and can't change anything in GRØD.",
+    "developerName": "Gaspery Limited",
+    "category": "Productivity",
+    "capabilities": ["Read"],
+    "websiteURL": "https://gaspery.com/grod",
+    "privacyPolicyURL": "https://gaspery.com/grod/privacy-policy/",
+    "defaultPrompt": ["Recap my meetings this week"],
+    "logo": "./icon.png"
+  }
+}

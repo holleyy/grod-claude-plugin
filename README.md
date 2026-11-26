@@ -1,36 +1,47 @@
-# GRØD for Claude
+# GRØD for Claude and Codex
 
-Ask Claude about the meetings GRØD recorded on your Mac. Claude can search
-them, read what was decided and who owns each action, and find what someone
-said and when they said it. It can't change, add or delete anything in GRØD.
+Ask Claude or Codex about the meetings GRØD recorded on your Mac. They can
+search them, read what was decided and who owns each action, and find what
+someone said and when they said it. They can't change, add or delete anything
+in GRØD.
 
 ## What you need
 
-- GRØD on the same Mac as Claude.
+- GRØD on the same Mac.
 - **Allow MCP apps** turned on in GRØD's settings. It is off until you turn
   it on.
-- Claude Code, or a Cowork task that runs on your Mac. Claude chats on the
-  web, on your phone and in the desktop app don't start servers on your Mac,
-  so this plugin's skills load there but can't reach GRØD.
+- Claude Code, a Cowork task that runs on your Mac, or Codex. Ordinary Claude
+  and ChatGPT chats, on the web, on your phone or in the desktop apps, don't
+  start servers on your Mac, so they can't reach GRØD.
 
 ## Install
+
+### Claude Code
 
 In Claude Code 2.1.275 or later:
 
 ```
-/plugin install grod --marketplace holleyy/grod-claude-plugin
+/plugin install grod --marketplace holleyy/grod-plugin
 ```
 
 In an older Claude Code, add the marketplace first, then install:
 
 ```
-/plugin marketplace add holleyy/grod-claude-plugin
+/plugin marketplace add holleyy/grod-plugin
 /plugin install grod@gaspery
+```
+
+### Codex
+
+```
+codex plugin marketplace add holleyy/grod-plugin
+codex plugin add grod@gaspery
 ```
 
 ## What to ask
 
-Ask in your own words and Claude picks the right skill, or start one by name:
+Ask in your own words and the app picks the right skill. In Claude Code you
+can also start one by name:
 
 | Skill | Use it for |
 |---|---|
@@ -49,12 +60,16 @@ For example:
 
 ## How it works
 
-The plugin has no server of its own. GRØD has one built in. When Claude
+The plugin has no server of its own. GRØD has one built in. When the app
 starts, `scripts/grod-mcp.sh` finds your copy of GRØD and starts it with one
-argument, `--mcp-stdio`. Claude then talks to GRØD over standard input and
+argument, `--mcp-stdio`. The app then talks to GRØD over standard input and
 output. The script looks for the copy of GRØD that is running, then
 `/Applications`, then `~/Applications`, then any copy Spotlight knows. To use
 a development build, set `GROD_APP` to its path.
+
+Each app reads its own manifest, `.claude-plugin/plugin.json` for Claude and
+`.codex-plugin/plugin.json` for Codex. Both use the same skills and the same
+script.
 
 GRØD's server has four read-only tools:
 
@@ -69,11 +84,11 @@ Versions of GRØD before `list_meetings` have the first three. The skills
 still work with them, but answers about a period may miss meetings.
 
 GRØD reads its meeting store with saving turned off and opens no network
-connection for this. It keeps a temporary search index while Claude is
-connected and deletes it when Claude disconnects. If **Allow MCP apps** is
+connection for this. It keeps a temporary search index while the app is
+connected and deletes it when the app disconnects. If **Allow MCP apps** is
 off, GRØD refuses to start the server.
 
-The skills in `skills/` are instructions for Claude: which tool to use for
+The skills in `skills/` are instructions for the app: which tool to use for
 which question, and how to answer from what it reads.
 
 ## Privacy Policy
@@ -81,18 +96,21 @@ which question, and how to answer from what it reads.
 **What this plugin collects.** Nothing. The plugin sends nothing to Gaspery
 Limited or anyone else, and has no analytics.
 
-**What leaves your Mac.** What Claude reads from GRØD becomes part of your
-conversation with Claude. Like the rest of the conversation, it goes to
-Anthropic, which runs Claude, under Anthropic's terms and your Claude privacy
-settings. Ask only about meetings you are happy to share with Claude.
+**What leaves your Mac.** What Claude or Codex reads from GRØD becomes part of
+your conversation with it. Like the rest of the conversation, it goes to the
+company that runs the app: Anthropic for Claude, under Anthropic's terms and
+your Claude privacy settings, or OpenAI for Codex, under OpenAI's terms and
+your OpenAI account's data controls. Ask only about meetings you are happy to
+share with that company.
 
 **Storage and retention.** The plugin stores nothing. Your meetings stay in
-GRØD. GRØD's temporary search index lasts only while Claude is connected.
+GRØD. GRØD's temporary search index lasts only while the app is connected.
 
-**Third parties.** Anthropic, as above. No one else.
+**Third parties.** Anthropic or OpenAI, as above, depending on the app you
+use. No one else.
 
 **Turning it off.** Switch off **Allow MCP apps** in GRØD, or remove the
-plugin from Claude.
+plugin from Claude or Codex.
 
 **Contact.** alex@gaspery.com. GRØD's full privacy policy is at
 https://gaspery.com/grod/privacy-policy/.
