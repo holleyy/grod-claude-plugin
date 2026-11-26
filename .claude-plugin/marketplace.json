@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "gaspery",
+  "owner": {
+    "name": "Gaspery Limited",
+    "email": "alex@gaspery.com"
+  },
+  "metadata": {
+    "description": "Plugins from Gaspery Limited, who make GRØD."
+  },
+  "plugins": [
+    {
+      "name": "grod",
+      "source": "./",
+      "description": "Ask Claude about the meetings GRØD recorded on your Mac: recaps, decisions, meeting prep and finding what was said.",
+      "category": "productivity"
+    }
+  ]
+}

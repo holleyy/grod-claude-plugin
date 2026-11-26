@@ -13,6 +13,21 @@ said and when they said it. It can't change, add or delete anything in GRØD.
   web, on your phone and in the desktop app don't start servers on your Mac,
   so this plugin's skills load there but can't reach GRØD.
 
+## Install
+
+In Claude Code 2.1.275 or later:
+
+```
+/plugin install grod --marketplace holleyy/grod-claude-plugin
+```
+
+In an older Claude Code, add the marketplace first, then install:
+
+```
+/plugin marketplace add holleyy/grod-claude-plugin
+/plugin install grod@gaspery
+```
+
 ## What to ask
 
 Ask in your own words and Claude picks the right skill, or start one by name:
