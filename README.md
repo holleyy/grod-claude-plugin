@@ -41,13 +41,17 @@ output. The script looks for the copy of GRØD that is running, then
 `/Applications`, then `~/Applications`, then any copy Spotlight knows. To use
 a development build, set `GROD_APP` to its path.
 
-GRØD's server has three read-only tools:
+GRØD's server has four read-only tools:
 
 | Tool | What it does |
 |---|---|
 | `search_records` | Searches your meetings, people and tags. |
 | `read_meeting` | Reads a meeting's overview and one part of it, a page at a time: transcript lines, actions, decisions, risks or bookmarks. |
 | `export_meeting_markdown` | Returns a meeting's summary, notes or transcript as Markdown, in chunks. |
+| `list_meetings` | Lists your meetings newest first, between two dates if you give them, a page at a time. |
+
+Versions of GRØD before `list_meetings` have the first three. The skills
+still work with them, but answers about a period may miss meetings.
 
 GRØD reads its meeting store with saving turned off and opens no network
 connection for this. It keeps a temporary search index while Claude is

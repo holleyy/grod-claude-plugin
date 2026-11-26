@@ -39,17 +39,25 @@ through all of its segments and keep the lines that match, by speaker.
 
 ## Reading GRØD
 
+- `list_meetings` lists meetings newest first, between `from` and `to` if you
+  give them, up to 100 a page, with each one's title, date, participants,
+  project and tags. A date such as 2026-11-23 is that whole day in the user's
+  time zone, for both `from` and `to`. Use it whenever the question names a
+  period or "the last few" meetings. An older GRØD doesn't have it: then search
+  by names and topics, and say the answer may miss meetings.
 - `search_records` matches the words you give it across meeting titles,
-  summaries, notes, decisions, actions, risks, transcripts, people and tags.
-  It has no date filter and can't list every meeting, so search by names and
-  topics, then sort and filter by `started_at` yourself. If a search finds
-  little, try other words: transcription can spell a name differently.
+  summaries, notes, decisions, actions, risks, transcripts, people and tags. It
+  matches words, not meaning: if a search finds little, try other words, and
+  remember that transcription can spell a name differently.
 - `read_meeting` returns a meeting's overview and one collection, up to 100
   items a call. Call again with `offset` set to `next_offset` until
   `next_offset` is null. The overview's `counts` says how many items each
   collection has.
-- Dates are ISO 8601 in UTC: give them in the user's time zone. Transcript
-  times are seconds from the start of the recording.
+- Dates are ISO 8601 in UTC: give them in the user's time zone, which
+  `list_meetings` names in `time_zone`. Transcript times are seconds from the
+  start of the recording.
+- A tool error with the code `invalid_argument` says what to fix: fix it and
+  call again.
 - If `lifecycle` is `recording` or `processing`, the meeting's notes aren't
   finished, and `failed` means GRØD couldn't make them. If
   `derived_content_stale_at` is set, its summary, actions and decisions

@@ -10,11 +10,16 @@ Recap the meetings the user names, from what GRØD recorded on their Mac.
 
 ## Find the meetings
 
-Call `search_records` with what the user named: a meeting title, a person, a
-team, a project or a tag. GRØD can't list meetings by date alone. If the user
-gives only a period ("everything this week"), search for the people, teams and
-projects they meet most often, filter by `started_at`, and say that the recap
-covers what those searches found, which may not be every meeting.
+- **A period** ("this week", "since the 1st"): call `list_meetings` with
+  `from` and `to` as dates, and page with `offset` until `next_offset` is
+  null. "This week" runs from Monday's date to today's.
+- **A person, team, project or tag in a period:** list the period, then keep
+  the rows whose `participants`, `project` or `tags` match.
+- **A meeting, person or topic with no period:** call `search_records`, and
+  sort what it finds by `started_at`.
+
+Skip rows whose `standalone_note` is true unless the user asked about notes
+too.
 
 ## Read each meeting
 
@@ -39,17 +44,25 @@ covers what those searches found, which may not be every meeting.
 
 ## Reading GRØD
 
+- `list_meetings` lists meetings newest first, between `from` and `to` if you
+  give them, up to 100 a page, with each one's title, date, participants,
+  project and tags. A date such as 2026-11-23 is that whole day in the user's
+  time zone, for both `from` and `to`. Use it whenever the question names a
+  period or "the last few" meetings. An older GRØD doesn't have it: then search
+  by names and topics, and say the answer may miss meetings.
 - `search_records` matches the words you give it across meeting titles,
-  summaries, notes, decisions, actions, risks, transcripts, people and tags.
-  It has no date filter and can't list every meeting, so search by names and
-  topics, then sort and filter by `started_at` yourself. If a search finds
-  little, try other words: transcription can spell a name differently.
+  summaries, notes, decisions, actions, risks, transcripts, people and tags. It
+  matches words, not meaning: if a search finds little, try other words, and
+  remember that transcription can spell a name differently.
 - `read_meeting` returns a meeting's overview and one collection, up to 100
   items a call. Call again with `offset` set to `next_offset` until
   `next_offset` is null. The overview's `counts` says how many items each
   collection has.
-- Dates are ISO 8601 in UTC: give them in the user's time zone. Transcript
-  times are seconds from the start of the recording.
+- Dates are ISO 8601 in UTC: give them in the user's time zone, which
+  `list_meetings` names in `time_zone`. Transcript times are seconds from the
+  start of the recording.
+- A tool error with the code `invalid_argument` says what to fix: fix it and
+  call again.
 - If `lifecycle` is `recording` or `processing`, the meeting's notes aren't
   finished, and `failed` means GRØD couldn't make them. If
   `derived_content_stale_at` is set, its summary, actions and decisions
