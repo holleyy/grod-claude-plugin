@@ -1,7 +1,7 @@
 ---
 name: recap
-description: Recap one meeting or a set of meetings GRØD recorded, such as yesterday's design review, a week with one team or a project's meetings this month. Use when the user asks to summarise, recap or write up meetings, or to draft an update for a manager, a team or a board from them.
-argument-hint: "[meeting, person, team, project or period]"
+description: Recap one meeting or a set of meetings GRØD recorded, such as yesterday's design review, a week with one team or a project's meetings this month. Use when the user asks to summarise, recap or write up meetings, or to draft an update for a manager, a team or a board from them. Also use when the user asks to check a recap, or a meeting's decisions and actions, against what was actually said.
+argument-hint: "[meeting, person, team, project or period] [check against the transcript]"
 ---
 
 # Recap meetings
@@ -28,9 +28,29 @@ too.
    offset until it is.
 2. Call `read_meeting` with `collection` `decisions`, then `actions`, for the
    exact wording and the owners.
-3. Read the transcript only when the meeting has no summary yet, or the user
-   wants detail the summary leaves out: `export_meeting_markdown` with
-   `artifact` `transcript`, chunk by chunk.
+3. Read a whole transcript only when the meeting has no summary yet, or the
+   user asks for the transcript itself or for detail the summary leaves out:
+   `export_meeting_markdown` with `artifact` `transcript`, chunk by chunk. To
+   check accuracy, check each claim against its own lines instead (below).
+
+## Check against the transcript
+
+When the user asks to check a recap, or asks whether it is accurate, check
+each decision and action you report against the lines it came from, not the
+whole transcript:
+
+1. Call `search_records` with two or three distinctive words from the item
+   that someone would have said aloud, such as a name, a number or a product,
+   not the whole sentence. Keep the hits from that meeting whose `kind` is
+   `segment`: the `snippet` is the transcript line and `segment_start` is when
+   it was said, in seconds from the start.
+2. If the snippet doesn't settle it, read the lines around it: `read_meeting`
+   with `collection` `segments`, paging with `offset` until `start_seconds`
+   reaches `segment_start`, then a few lines either side.
+3. Mark the item **matches** (give the time), **differs** (quote the line and
+   say how), or **couldn't find its lines**. GRØD writes decisions and actions
+   in its own words, so a search can miss them: not finding the lines never
+   makes an item wrong, and you say only that you couldn't find them.
 
 ## Write the recap
 
@@ -40,6 +60,8 @@ too.
   actions with their owners, and risks still standing.
 - For a drafted update, write in the user's voice, use only what you read, and
   mark anything the user should check before sending.
+- If you checked against the transcript, show each decision and action's
+  mark, and say how many matched, differed and couldn't be found.
 - List the meetings you read, by title and date.
 
 ## Reading GRØD

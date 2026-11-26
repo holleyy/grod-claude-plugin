@@ -21,7 +21,7 @@ Ask in your own words and Claude picks the right skill, or start one by name:
 |---|---|
 | `/grod:prep` | Before a meeting: what you agreed last time, what is still open, and what to raise. |
 | `/grod:decisions` | What was decided and what is still open on a topic, a project or with a person. |
-| `/grod:recap` | A recap of one meeting or a set of them, such as a week with one team. |
+| `/grod:recap` | A recap of one meeting or a set of them, such as a week with one team. Ask it to check against the transcript, and it checks each decision and action against the lines it came from. |
 | `/grod:find` | Where something was said, who said it and when. |
 
 For example:
