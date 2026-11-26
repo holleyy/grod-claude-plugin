@@ -1,8 +1,7 @@
 {
   "mcpServers": {
     "grod": {
-      "command": "sh",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/grod-mcp.sh"]
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/grod-mcp.sh"
     }
   }
 }

@@ -118,6 +118,6 @@ https://gaspery.com/grod/privacy-policy/.
 ## Licence
 
 Everything in this repository is under the MIT licence in [LICENSE](LICENSE),
-except the GRØD name and icon (`icon.png`). Those belong to Gaspery Limited and
+except the GRØD name and icon. Those belong to Gaspery Limited and
 the licence doesn't cover them. If you adapt this plugin, give it your own name
 and icon, and don't present it as made or endorsed by Gaspery Limited.
